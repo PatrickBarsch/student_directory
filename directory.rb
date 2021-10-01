@@ -25,7 +25,7 @@ def input_students
   #get the first name
   name = gets.chomp
   until name.empty? do
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobby: :coding, height: :medium, country: :somewhere}
     puts "Now we have #{students.count} students"
     # get the next name from the user
     name = gets.chomp
@@ -42,7 +42,8 @@ def print(students, letter)
   i = 0
   until i == students.length
     if students[i][:name][0] == letter && students[i][:name].length < 12
-      puts "#{i + 1} #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+      puts "#{i + 1} #{students[i][:name]} (#{students[i][:cohort]} cohort " \
+       "#{students[i][:hobby]} #{students[i][:height]} #{students[i][:country]})"
     end
     i += 1
   end
