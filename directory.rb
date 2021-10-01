@@ -11,11 +11,23 @@ students = [
   "Joffrey Baratheon",
   "Norman Bates"
 ]
-# Print a list of all the students
-puts "The students of the Villains Academy"
-puts "-----------------"
-students.each do |student|
-  puts student 
+
+def print_header
+  puts "The students of the Villains Academy"
+  puts "-----------------"
 end
-# Finally, we print the overall number using print to avoid the linebreak.
-puts "Overall, we have #{students.count} great students."
+
+def print(names)
+  names.each do |name|
+    puts name
+  end
+end
+
+def print_footer(names)
+  puts "Overall, we have #{names.count} great students."
+end
+
+# now we have to call the methods
+print_header
+print(students)
+print_footer(students)
