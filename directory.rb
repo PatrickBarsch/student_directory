@@ -12,6 +12,21 @@ students = [
   {name: "Norman Bates", cohort: :november},
 ]
 
+def input_students
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return twice"
+  students = []
+  #get the first name
+  name = gets.chomp
+  until name.empty? do
+    students << {name: name, cohort: :november}
+    puts "Now we have #{students.count} students"
+    # get the next name from the user
+    name = gets.chomp
+  end
+  return students
+end
+
 def print_header
   puts "The students of the Villains Academy"
   puts "-----------------"
@@ -28,6 +43,7 @@ def print_footer(names)
 end
 
 # now we have to call the methods
+students = input_students
 print_header
 print(students)
 print_footer(students)
