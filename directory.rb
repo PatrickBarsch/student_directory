@@ -40,7 +40,7 @@ end
 
 def print(students, letter)
   students.each_with_index do |student, number|
-    if student[:name][0] == letter
+    if student[:name][0] == letter && student[:name].length < 12
       puts "#{number + 1} #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
