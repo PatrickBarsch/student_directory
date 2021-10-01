@@ -34,8 +34,8 @@ def input_students
 end
 
 def print_header
-  puts "The students of the Villains Academy"
-  puts "-----------------"
+  puts "The students of the Villains Academy".center(60)
+  puts "-----------------".center(60)
 end
 
 def print(students, letter)
@@ -43,14 +43,14 @@ def print(students, letter)
   until i == students.length
     if students[i][:name][0] == letter && students[i][:name].length < 12
       puts "#{i + 1} #{students[i][:name]} (#{students[i][:cohort]} cohort " \
-       "#{students[i][:hobby]} #{students[i][:height]} #{students[i][:country]})"
+       "#{students[i][:hobby]} #{students[i][:height]} #{students[i][:country]})".center(60)
     end
     i += 1
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students."
+  puts "Overall, we have #{names.count} great students.".center(60)
 end
 
 # now we have to call the methods
