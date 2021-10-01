@@ -12,6 +12,12 @@ students = [
   {name: "Norman Bates", cohort: :november},
 ]
 
+def beginning_letter
+  puts "Please enter the letter, the students names that"
+  puts "are printed should begin with"
+  beginning_letter = gets.chomp
+end
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -32,9 +38,11 @@ def print_header
   puts "-----------------"
 end
 
-def print(students)
+def print(students, letter)
   students.each_with_index do |student, number|
-    puts "#{number + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+    if student[:name][0] == letter
+      puts "#{number + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
@@ -43,7 +51,8 @@ def print_footer(names)
 end
 
 # now we have to call the methods
+letter = beginning_letter.upcase
 students = input_students
 print_header
-print(students)
+print(students, letter)
 print_footer(students)
