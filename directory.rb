@@ -1,3 +1,4 @@
+# Print a list of all the students
 puts "The students of the Villains Academy"
 puts "-----------------"
 puts "Dr. Hannibal Lecter"
@@ -11,3 +12,7 @@ puts "Freddy Kruger"
 puts "The Joker"
 puts "Joffrey Baratheon"
 puts "Norman Bates"
+# Finally, we print the overall number using print to avoid the linebreak.
+print "Overall, we have "
+print 11
+puts " great students."
