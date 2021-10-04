@@ -1,25 +1,37 @@
+@students = []
+@current_letter = ""
+
 def interactive_menu
-  students = []
-  current_letter = ""
   loop do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    selection = gets.chomp
-    case selection
-    when "1"
-      current_letter = beginning_letter
-      students = input_students
-    when "2"
-      print_header
-      print_students(students, current_letter)
-      print_footer(students)
-    when "9"
-      exit
-    else
-      puts "I don't know what you meant, try again."
-    end
+    print_menu
+    process(gets.chomp)
   end
+end
+
+def process(selection)
+  case selection
+  when "1"
+    @current_letter = beginning_letter
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else
+    puts "I don't know what you meant, try again."
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print_students
+  print_footer
 end
 
 def beginning_letter
@@ -29,7 +41,7 @@ def beginning_letter
 end
 
 def input_students
-  students = []
+  @students = []
   while true do
     puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
@@ -46,12 +58,12 @@ def input_students
     end
     next if user_input == "n"
     cohort = "november" if cohort.empty?
-    students << {name: name.to_sym, cohort: cohort.to_sym, hobby: :coding, 
+    @students << {name: name.to_sym, cohort: cohort.to_sym, hobby: :coding, 
 		height: :medium, country: :somewhere}
-    correct_students = students.count == 1 ? "student" : "students"
-    puts "Now we have #{students.count} #{correct_students}" 
+    correct_students = @students.count == 1 ? "student" : "students"
+    puts "Now we have #{@students.count} #{correct_students}" 
   end
-  students.sort! do |student_1,student_2| 
+  @students.sort! do |student_1,student_2| 
     student_1[:cohort] <=> student_2[:cohort]
   end
 end
@@ -61,28 +73,28 @@ def print_header
   puts "-----------------".center(60)
 end
 
-def print_students(students, letter)
+def print_students
   i = 0
-  previous_cohort =  students[0][:cohort]
-  until i == students.length
-    if students[i][:name][0] == letter && students[i][:name].length < 12
-      puts "#{i + 1} #{students[i][:name]} " \
-      "(#{students[i][:cohort]} cohort" \
-      " #{students[i][:hobby]}" \
-      " #{students[i][:height]}" \
-      " #{students[i][:country]})".center(60)
+  previous_cohort = @students[0][:cohort]
+  until i == @students.length
+    if @students[i][:name][0] == @current_letter && @students[i][:name].length < 12
+      puts "#{i + 1} #{@students[i][:name]} " \
+      "(#{@students[i][:cohort]} cohort" \
+      " #{@students[i][:hobby]}" \
+      " #{@students[i][:height]}" \
+      " #{@students[i][:country]})".center(60)
     end
-    if previous_cohort != students[i][:cohort]
+    if previous_cohort != @students[i][:cohort]
       puts "-----------------".center(60)
     end
-    previous_cohort = students[i][:cohort]
+    previous_cohort = @students[i][:cohort]
     i += 1
   end
 end
 
-def print_footer(names)
-  correct_names = names.count == 1 ? "student" : "students"
-  puts "Overall, we have #{names.count} great #{correct_names}".center(60)  
+def print_footer
+  correct_names = @students.count == 1 ? "student" : "students"
+  puts "Overall, we have #{@students.count} great #{correct_names}".center(60)  
 end
 
 interactive_menu
