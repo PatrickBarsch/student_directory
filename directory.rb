@@ -15,7 +15,7 @@ students = [
 def beginning_letter
   puts "Please enter the letter, the students names that"
   puts "are printed should begin with"
-  beginning_letter = gets.chomp
+  beginning_letter = gets.gsub(/\n|\r|\n\r/, "")
 end
 
 def input_students
@@ -23,16 +23,16 @@ def input_students
   while true do
     puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
-    name = gets.chomp
+    name = gets.gsub(/\n|\r|\n\r/, "")
     break if name.empty?
     puts "Please enter the students cohort"
-    cohort = gets.chomp
+    cohort = gets.gsub(/\n|\r|\n\r/, "")
     puts "This is your input: #{name} #{cohort}"
     puts "If it is correct, please confirm with 'y'."
     puts "If it is incorrect and you want to re-do it, please enter 'n'."
     user_input = ""
     until user_input == "n" || user_input =="y"
-      user_input = gets.chomp
+      user_input = gets.gsub(/\n|\r|\n\r/, "")
     end
     next if user_input == "n"
     cohort = "november" if cohort.empty?
@@ -51,7 +51,7 @@ def print_header
   puts "-----------------".center(60)
 end
 
-def print(students, letter)
+def print_students(students, letter)
   i = 0
   previous_cohort =  students[0][:cohort]
   until i == students.length
@@ -62,11 +62,11 @@ def print(students, letter)
       " #{students[i][:height]}" \
       " #{students[i][:country]})".center(60)
     end
-    i += 1
     if previous_cohort != students[i][:cohort]
-      puts "----------------------------------------------".center(60)
+      puts "-----------------".center(60)
     end
     previous_cohort = students[i][:cohort]
+    i += 1
   end
 end
 
@@ -79,5 +79,5 @@ end
 letter = beginning_letter.upcase
 students = input_students
 print_header
-print(students, letter)
+print_students(students, letter)
 print_footer(students)
