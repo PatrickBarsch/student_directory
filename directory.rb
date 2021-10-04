@@ -41,7 +41,9 @@ def input_students
     correct_students = students.count == 1 ? "student" : "students"
     puts "Now we have #{students.count} #{correct_students}" 
   end
-  return students
+  students.sort! do |student_1,student_2| 
+    student_1[:cohort] <=> student_2[:cohort]
+  end
 end
 
 def print_header
