@@ -19,16 +19,26 @@ def beginning_letter
 end
 
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
   students = []
-  #get the first name
-  name = gets.chomp
-  until name.empty? do
-    students << {name: name, cohort: :november, hobby: :coding, height: :medium, country: :somewhere}
-    puts "Now we have #{students.count} students"
-    # get the next name from the user
+  while true do
+    puts "Please enter the names of the students"
+    puts "To finish, just hit return twice"
     name = gets.chomp
+    break if name.empty?
+    puts "Please enter the students cohort"
+    cohort = gets.chomp
+    puts "This is your input: #{name} #{cohort}"
+    puts "If it is correct, please confirm with 'y'."
+    puts "If it is incorrect and you want to re-do it, please enter 'n'."
+    user_input = ""
+    until user_input == "n" || user_input =="y"
+      user_input = gets.chomp
+    end
+    next if user_input == "n"
+    cohort = "november" if cohort.empty?
+    students << {name: name.to_sym, cohort: cohort.to_sym, hobby: :coding, 
+		height: :medium, country: :somewhere}
+    puts "Now we have #{students.count} students"
   end
   return students
 end
@@ -42,8 +52,11 @@ def print(students, letter)
   i = 0
   until i == students.length
     if students[i][:name][0] == letter && students[i][:name].length < 12
-      puts "#{i + 1} #{students[i][:name]} (#{students[i][:cohort]} cohort " \
-       "#{students[i][:hobby]} #{students[i][:height]} #{students[i][:country]})".center(60)
+      puts "#{i + 1} #{students[i][:name]}" \
+      "(#{students[i][:cohort]} cohort" \
+      " #{students[i][:hobby]}" \
+      " #{students[i][:height]}" \
+      " #{students[i][:country]})".center(60)
     end
     i += 1
   end
