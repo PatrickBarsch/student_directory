@@ -38,7 +38,8 @@ def input_students
     cohort = "november" if cohort.empty?
     students << {name: name.to_sym, cohort: cohort.to_sym, hobby: :coding, 
 		height: :medium, country: :somewhere}
-    puts "Now we have #{students.count} students"
+    correct_students = students.count == 1 ? "student" : "students"
+    puts "Now we have #{students.count} #{correct_students}" 
   end
   return students
 end
@@ -52,7 +53,7 @@ def print(students, letter)
   i = 0
   until i == students.length
     if students[i][:name][0] == letter && students[i][:name].length < 12
-      puts "#{i + 1} #{students[i][:name]}" \
+      puts "#{i + 1} #{students[i][:name]} " \
       "(#{students[i][:cohort]} cohort" \
       " #{students[i][:hobby]}" \
       " #{students[i][:height]}" \
@@ -63,7 +64,8 @@ def print(students, letter)
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students.".center(60)
+  correct_names = names.count == 1 ? "student" : "students"
+  puts "Overall, we have #{names.count} great #{correct_names}".center(60)  
 end
 
 # now we have to call the methods
