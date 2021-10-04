@@ -53,6 +53,7 @@ end
 
 def print(students, letter)
   i = 0
+  previous_cohort =  students[0][:cohort]
   until i == students.length
     if students[i][:name][0] == letter && students[i][:name].length < 12
       puts "#{i + 1} #{students[i][:name]} " \
@@ -62,6 +63,10 @@ def print(students, letter)
       " #{students[i][:country]})".center(60)
     end
     i += 1
+    if previous_cohort != students[i][:cohort]
+      puts "----------------------------------------------".center(60)
+    end
+    previous_cohort = students[i][:cohort]
   end
 end
 
