@@ -1,16 +1,26 @@
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Kruger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november},
-]
+def interactive_menu
+  students = []
+  current_letter = ""
+  loop do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    selection = gets.chomp
+    case selection
+    when "1"
+      current_letter = beginning_letter
+      students = input_students
+    when "2"
+      print_header
+      print_students(students, current_letter)
+      print_footer(students)
+    when "9"
+      exit
+    else
+      puts "I don't know what you meant, try again."
+    end
+  end
+end
 
 def beginning_letter
   puts "Please enter the letter, the students names that"
@@ -75,13 +85,4 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great #{correct_names}".center(60)  
 end
 
-# now we have to call the methods
-letter = beginning_letter.upcase
-students = input_students
-print_header
-if students.count > 0
-  print_students(students, letter)
-else
-  puts "Actually...we seem to have none right now :(".center(60)
-end
-print_footer(students)
+interactive_menu
