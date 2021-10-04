@@ -79,5 +79,9 @@ end
 letter = beginning_letter.upcase
 students = input_students
 print_header
-print_students(students, letter)
+if students.count > 0
+  print_students(students, letter)
+else
+  puts "Actually...we seem to have none right now :(".center(60)
+end
 print_footer(students)
