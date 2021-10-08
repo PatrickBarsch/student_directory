@@ -90,7 +90,9 @@ def print_students
   i = 0
   previous_cohort = @students[0][:cohort]
   until i == @students.length
-    if @students[i][:name][0] == @current_letter && @students[i][:name].length < 12
+    name_matches = @students[i][:name][0] == @current_letter
+    not_to_long = @students[i][:name].length < 12
+    if ( name_matches || @current_letter =="" ) && not_to_long
       puts "#{i + 1} #{@students[i][:name]} " \
       "(#{@students[i][:cohort]} cohort" \
       " #{@students[i][:hobby]}" \
