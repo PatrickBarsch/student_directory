@@ -43,29 +43,42 @@ end
 def input_students
   @students = []
   while true do
-    puts "Please enter the names of the students"
-    puts "To finish, just hit return twice"
-    name = gets.gsub(/\n|\r|\n\r/, "")
+    name, cohort = get_student
     break if name.empty?
-    puts "Please enter the students cohort"
-    cohort = gets.gsub(/\n|\r|\n\r/, "")
-    puts "This is your input: #{name} #{cohort}"
-    puts "If it is correct, please confirm with 'y'."
-    puts "If it is incorrect and you want to re-do it, please enter 'n'."
-    user_input = ""
-    until user_input == "n" || user_input =="y"
-      user_input = gets.gsub(/\n|\r|\n\r/, "")
-    end
+    user_input = confirm_input(name,cohort)
     next if user_input == "n"
     cohort = "november" if cohort.empty?
-    @students << {name: name.to_sym, cohort: cohort.to_sym, hobby: :coding, 
-		height: :medium, country: :somewhere}
-    correct_students = @students.count == 1 ? "student" : "students"
-    puts "Now we have #{@students.count} #{correct_students}" 
+    @students << {name: name.to_sym, 
+      cohort: cohort.to_sym, 
+      hobby: :coding, 
+		  height: :medium, 
+      country: :somewhere
+    }
+    puts "Now we have #{@students.count} student#{@students.count == 1 ? "" : "s"}" 
   end
   @students.sort! do |student_1,student_2| 
     student_1[:cohort] <=> student_2[:cohort]
   end
+end
+
+def get_student
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return twice"
+  name = gets.gsub(/\n|\r|\n\r/, "")
+  puts "Please enter the students cohort"
+  cohort = gets.gsub(/\n|\r|\n\r/, "")
+  return name, cohort
+end
+
+def confirm_input(name, cohort)
+  puts "This is your input: #{name} #{cohort}"
+  puts "If it is correct, please confirm with 'y'."
+  puts "If it is incorrect and you want to re-do it, please enter 'n'."
+  user_input = ""
+  until user_input == "n" || user_input =="y"
+    user_input = gets.gsub(/\n|\r|\n\r/, "")
+  end
+  user_input
 end
 
 def print_header
